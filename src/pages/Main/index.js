@@ -18,11 +18,13 @@ export default function App() {
   useEffect(() => {
     async function loadGame(browserIdStorage) {
       try {
-        const response = await api.get('/games', {
+        const response = await api.get('/last-board', {
           headers: {
             browser_id: browserIdStorage,
           },
         });
+        const { data } = response;
+        setBoard(JSON.parse(data.board));
       } catch (e) {}
     }
     const browserIdStorage = localStorage.getItem('browser_id');
@@ -33,9 +35,14 @@ export default function App() {
       newGame();
     }
   }, []);
+  function getPossibleMoves({ position, square }) {
+    try {
+      const response = await api.get(`/moves/${position}`);
+    } catch (e) {}
+  }
   return (
     <Container>
-      {board && <Board board={board} />}
+      {board && <Board board={board} getPossibleMoves={getPossibleMoves} />}
 
       <Button onClick={newGame}>New Game</Button>
     </Container>

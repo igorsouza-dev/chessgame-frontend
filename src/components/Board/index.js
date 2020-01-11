@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container } from './styles';
+import { Container, Outline } from './styles';
 import Square from '../Square';
 
 const Board = ({
@@ -40,7 +40,11 @@ const Board = ({
     });
     return squares;
   }
-  return <Container>{renderBoard()}</Container>;
+  return (
+    <Outline>
+      <Container>{renderBoard()}</Container>
+    </Outline>
+  );
 };
 
 export default Board;

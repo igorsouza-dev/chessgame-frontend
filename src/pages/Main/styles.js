@@ -6,6 +6,8 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  background-image: linear-gradient(25deg, #272238, #583c52, #8b586d, #c17689);
 `;
 export const Button = styled.button`
   background: #335577;
@@ -14,6 +16,7 @@ export const Button = styled.button`
   font-weight: bold;
   text-transform: uppercase;
   border-radius: 4px;
+  border: 0;
   padding: 0 12px;
   color: #fff;
 
@@ -35,4 +38,10 @@ export const ButtonsContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-self: stretch;
+  margin-top: 10px;
+  > button {
+    width: 84px;
+    height: 36px;
+    font-size: 12px;
+  }
 `;

@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
 import Board from '../../components/Board';
-import { Container, Button } from './styles';
+import { Container, Button, BoardContainer, ButtonsContainer } from './styles';
 
 export default function App() {
   const [board, setBoard] = useState();
   const [browserId, setBrowserId] = useState();
+  const [possibleMoves, setPossibleMoves] = useState();
+  const [selected, setSelected] = useState();
+
   async function newGame() {
     try {
-      const response = await api.post('/games');
+      const response = await api.post('/new-game');
       const { data } = response;
       setBoard(JSON.parse(data.board.board));
       setBrowserId(data.game.browser_id);
@@ -18,7 +21,7 @@ export default function App() {
   useEffect(() => {
     async function loadGame(browserIdStorage) {
       try {
-        const response = await api.get('/last-board', {
+        const response = await api.get('/load-game', {
           headers: {
             browser_id: browserIdStorage,
           },
@@ -35,16 +38,49 @@ export default function App() {
       newGame();
     }
   }, []);
-  function getPossibleMoves({ position, square }) {
+  async function getPossibleMoves({ position }) {
+    setSelected(position);
     try {
-      const response = await api.get(`/moves/${position}`);
+      const response = await api.get(`/legal-moves/${position}`, {
+        headers: { browser_id: browserId },
+      });
+      setPossibleMoves(response.data);
     } catch (e) {}
+  }
+  function clearHighlights() {
+    // setPossibleMoves([]);
+  }
+  async function handleMakeMove({ position }) {
+    if (selected) {
+      try {
+        const response = await api.get(`/make-move/${selected}/${position}`, {
+          headers: { browser_id: browserId },
+        });
+        const { data } = response;
+        setBoard(JSON.parse(data.board));
+        setPossibleMoves([]);
+      } catch (e) {}
+    }
   }
   return (
     <Container>
-      {board && <Board board={board} getPossibleMoves={getPossibleMoves} />}
-
       <Button onClick={newGame}>New Game</Button>
+
+      {board && (
+        <BoardContainer>
+          <Board
+            board={board}
+            getPossibleMoves={getPossibleMoves}
+            makeMove={handleMakeMove}
+            highlights={possibleMoves}
+            clearHighlights={clearHighlights}
+          />
+          <ButtonsContainer>
+            <Button onClick={newGame}>Previous</Button>
+            <Button onClick={newGame}>Next</Button>
+          </ButtonsContainer>
+        </BoardContainer>
+      )}
     </Container>
   );
 }

@@ -3,7 +3,13 @@ import React from 'react';
 import { Container } from './styles';
 import Square from '../Square';
 
-const Board = ({ board, getPossibleMoves }) => {
+const Board = ({
+  board,
+  getPossibleMoves,
+  highlights,
+  makeMove,
+  clearHighlights,
+}) => {
   function renderBoard() {
     const squares = Object.keys(board).map((square, index) => {
       let isBlack = index % 2;
@@ -16,14 +22,19 @@ const Board = ({ board, getPossibleMoves }) => {
         isBlack = !isBlack;
       }
       const clickable = board[square].piece;
+      const highlighted = highlights && highlights.find((h) => h === square);
+
       return (
         <Square
           key={square}
           square={board[square]}
           position={square}
           isBlack={isBlack}
-          clickable={clickable}
+          clickable={clickable || highlighted}
+          highlighted={highlighted}
           getPossibleMoves={clickable && getPossibleMoves}
+          handleLostFocus={clearHighlights}
+          makeMove={highlighted && makeMove}
         />
       );
     });

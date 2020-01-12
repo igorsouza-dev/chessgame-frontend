@@ -3,6 +3,7 @@ import React from 'react';
 import { Container, ScoreContainer, PieceScoreContainer } from './styles';
 
 export default function PlayerContainer({ player, turn, pieces }) {
+  const otherPlayer = player === 'B' ? 'W' : 'B';
   return (
     <Container player={player}>
       <h1>{player === 'B' ? 'Black' : 'White'} pieces</h1>
@@ -12,7 +13,7 @@ export default function PlayerContainer({ player, turn, pieces }) {
           {pieces.map((piece) => (
             <>
               <img
-                src={`/pieces/${player}${piece.symbol}.png`}
+                src={`/pieces/${otherPlayer}${piece.symbol}.svg`}
                 alt={piece.name}
               />
               <span>{`x${piece.amount}`}</span>

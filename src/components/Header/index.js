@@ -6,7 +6,7 @@ export default function Header({ children }) {
   return (
     <Container>
       <LogoContainer>
-        <img src="/pieces/WN.png" alt="" />
+        <img src="/chessboard-white.svg" alt="" />
         <span>Chess Game</span>
       </LogoContainer>
       <ActionsContainer>{children}</ActionsContainer>

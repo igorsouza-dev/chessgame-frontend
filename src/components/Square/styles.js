@@ -5,7 +5,7 @@ export const Container = styled.button`
   width: 55px;
   background: ${(props) => {
     if (props.highlighted) {
-      return '#445588';
+      return '#EFBDB5';
     }
     if (props.isBlack) {
       return '#623028';
@@ -18,7 +18,7 @@ export const Container = styled.button`
       animation: glowing 2000ms ease-out alternate infinite;
       @keyframes glowing {
         0% { box-shadow: 0 0 -10px #eee, inset 0 0 -10px #eee; }
-        100% { box-shadow: 0 0 10px #eee, inset 0 0 5px #eee; border-color: #445588; }
+        100% { box-shadow: 0 0 10px #eee, inset 0 0 5px #eee; }
       }
       `;
     }
@@ -28,19 +28,19 @@ export const Container = styled.button`
   transition: all 0.2s;
 
   &:hover {
-    ${(props) => props.clickable && 'background: #453583;'};
+    ${(props) => props.clickable && 'background: #EFBDB5;'};
     cursor: ${(props) => (props.clickable ? 'pointer' : 'default')};
   }
   ${(props) =>
     props.clickable &&
     `
     &:focus {
-      border: solid 2px rgba(255,255,255,0.2);
-      background: #453583;
+      border: solid 2px #000;
+      background: #EFBDB5;
     }
     `}
   img {
-    width: 55px;
-    height: 55px;
+    width: 48px;
+    height: 48px;
   }
 `;

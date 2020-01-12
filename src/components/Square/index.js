@@ -26,7 +26,7 @@ const Square = ({
       highlighted={highlighted}
     >
       {square.piece && (
-        <img src={`pieces/${square.color}${square.piece}.png`} alt="" />
+        <img src={`pieces/${square.color}${square.piece}.svg`} alt="" />
       )}
     </Container>
   );

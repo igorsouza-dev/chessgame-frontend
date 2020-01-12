@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
 import Board from '../../components/Board';
-import { Container, Button, BoardContainer, ButtonsContainer } from './styles';
+import Header from '../../components/Header';
+
+import { Container, Button, BoardContainer } from './styles';
 
 export default function App() {
   const [board, setBoard] = useState();
@@ -64,7 +66,9 @@ export default function App() {
   }
   return (
     <Container>
-      <Button onClick={newGame}>New Game</Button>
+      <Header>
+        <Button onClick={newGame}>New Game</Button>
+      </Header>
 
       {board && (
         <BoardContainer>
@@ -75,10 +79,6 @@ export default function App() {
             highlights={possibleMoves}
             clearHighlights={clearHighlights}
           />
-          <ButtonsContainer>
-            <Button onClick={newGame}>Previous</Button>
-            <Button onClick={newGame}>Next</Button>
-          </ButtonsContainer>
         </BoardContainer>
       )}
     </Container>

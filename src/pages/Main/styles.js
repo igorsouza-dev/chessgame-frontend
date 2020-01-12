@@ -5,7 +5,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 
   background-image: linear-gradient(25deg, #272238, #583c52, #8b586d, #c17689);
 `;
@@ -30,7 +30,7 @@ export const BoardContainer = styled.div`
   align-items: center;
   justify-content: center;
 
-  margin-top: 10px;
+  margin-top: 46px;
 `;
 
 export const ButtonsContainer = styled.div`

@@ -9,6 +9,7 @@ const Board = ({
   highlights,
   makeMove,
   clearHighlights,
+  turn,
 }) => {
   function renderBoard() {
     const squares = Object.keys(board).map((square, index) => {
@@ -21,7 +22,10 @@ const Board = ({
       ) {
         isBlack = !isBlack;
       }
-      const clickable = board[square].piece;
+      let clickable = board[square].piece;
+      if (clickable) {
+        clickable = board[square].color === turn;
+      }
       const highlighted = highlights && highlights.find((h) => h === square);
 
       return (

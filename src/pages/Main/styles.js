@@ -26,8 +26,9 @@ export const Button = styled.button`
 `;
 export const BoardContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  align-self: stretch;
   justify-content: center;
 
   margin-top: 46px;
@@ -44,4 +45,16 @@ export const ButtonsContainer = styled.div`
     height: 36px;
     font-size: 12px;
   }
+`;
+
+export const Loading = styled.h1`
+  flex: 1;
+  font-size: 48px;
+  height: 100%;
+  width: 100%;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Lobster', recursive;
 `;

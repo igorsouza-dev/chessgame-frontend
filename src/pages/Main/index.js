@@ -2,12 +2,20 @@ import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
 import Board from '../../components/Board';
 import Header from '../../components/Header';
-import PlayerContainer from '../../components/PlayerContainer';
+import PlayerInfo from '../../components/PlayerInfo';
+import MovesContainer from '../../components/MovesContainer';
 
-import { Container, Button, BoardContainer, Loading } from './styles';
+import {
+  Container,
+  Button,
+  BoardContainer,
+  Loading,
+  PlayersContainer,
+} from './styles';
 
 export default function App() {
   const [board, setBoard] = useState();
+  const [moves, setMoves] = useState([]);
   const [browserId, setBrowserId] = useState();
   const [possibleMoves, setPossibleMoves] = useState();
   const [selected, setSelected] = useState();
@@ -16,6 +24,7 @@ export default function App() {
   async function newGame() {
     setLoading(true);
     setBoard(null);
+    setMoves([]);
     try {
       const response = await api.post('/new-game');
       const { data } = response;
@@ -36,8 +45,9 @@ export default function App() {
           },
         });
         const { data } = response;
-        setBoard(JSON.parse(data.board));
+        setBoard(JSON.parse(data.board.board));
         setTurn(data.board.turn_player === 'W' ? 'B' : 'W');
+        setMoves(data.moves);
       } catch (e) {}
       setLoading(false);
     }
@@ -68,8 +78,9 @@ export default function App() {
           headers: { browser_id: browserId },
         });
         const { data } = response;
-        setBoard(JSON.parse(data.board));
+        setBoard(JSON.parse(data.board.board));
         setTurn(turn === 'W' ? 'B' : 'W');
+        setMoves([data.move, ...moves]);
         setPossibleMoves([]);
       } catch (e) {}
     }
@@ -82,11 +93,18 @@ export default function App() {
       {loading && <Loading>Loading...</Loading>}
       {board && (
         <BoardContainer>
-          <PlayerContainer
-            player="W"
-            pieces={[{ symbol: 'N', amount: 1, name: 'Knight' }]}
-            turn={turn}
-          />
+          <PlayersContainer>
+            <PlayerInfo
+              player="B"
+              pieces={[{ symbol: 'N', amount: 1, name: 'Knight' }]}
+              turn={turn}
+            />
+            <PlayerInfo
+              player="W"
+              pieces={[{ symbol: 'N', amount: 1, name: 'Knight' }]}
+              turn={turn}
+            />
+          </PlayersContainer>
           <Board
             board={board}
             getPossibleMoves={getPossibleMoves}
@@ -95,11 +113,7 @@ export default function App() {
             clearHighlights={clearHighlights}
             turn={turn}
           />
-          <PlayerContainer
-            player="B"
-            pieces={[{ symbol: 'N', amount: 1, name: 'Knight' }]}
-            turn={turn}
-          />
+          <MovesContainer moves={moves} />
         </BoardContainer>
       )}
     </Container>

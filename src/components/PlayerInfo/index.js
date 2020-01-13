@@ -11,13 +11,13 @@ export default function PlayerContainer({ player, turn, pieces }) {
       <ScoreContainer>
         <PieceScoreContainer>
           {pieces.map((piece) => (
-            <>
+            <div key={`${otherPlayer}${piece.symbol}`}>
               <img
                 src={`/pieces/${otherPlayer}${piece.symbol}.svg`}
                 alt={piece.name}
               />
               <span>{`x${piece.amount}`}</span>
-            </>
+            </div>
           ))}
         </PieceScoreContainer>
       </ScoreContainer>

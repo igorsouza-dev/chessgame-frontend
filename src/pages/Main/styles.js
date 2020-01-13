@@ -33,20 +33,12 @@ export const BoardContainer = styled.div`
 
   margin-top: 46px;
 `;
-
-export const ButtonsContainer = styled.div`
+export const PlayersContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-self: stretch;
-  margin-top: 10px;
-  > button {
-    width: 84px;
-    height: 36px;
-    font-size: 12px;
-  }
+  flex-direction: column;
+  flex: 2;
+  height: 100%;
 `;
-
 export const Loading = styled.h1`
   flex: 1;
   font-size: 48px;

@@ -82,7 +82,7 @@ export default function App() {
     }
   }
   function clearHighlights() {
-    // setPossibleMoves([]);
+    setPossibleMoves([]);
   }
   async function handleMakeMove({ position }) {
     if (selected) {

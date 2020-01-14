@@ -9,7 +9,7 @@ export default function Moves({ moves }) {
         {moves.length === 0 && <InfoText>No moves yet</InfoText>}
         {moves.map((move) => (
           <Move key={move.id}>
-            <span>{move.move_number}</span>
+            <span>{move.move_number}: </span>
             <img src={`pieces/${move.player}${move.piece}.svg`} />
             <span>
               {move.from} {'->'} {move.to} {move.flag === 'x' && '(attack)'}

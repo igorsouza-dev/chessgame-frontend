@@ -9,8 +9,8 @@ export const Container = styled.div`
   background: ${colors.lightTile};
   border-radius: 3px;
   padding: 10px;
-  min-height: 150px;
-  max-height: 200px;
+  min-height: 200px;
+  max-height: 250px;
   width: 100%;
   h1 {
     font-family: 'Lobster', cursive;
@@ -31,7 +31,7 @@ export const MoveList = styled.div`
   height: 100%;
 
   margin: 10px;
-  padding: 10px;
+  padding: 20px;
 `;
 export const Move = styled.div`
   display: flex;
@@ -39,11 +39,11 @@ export const Move = styled.div`
   justify-content: flex-start;
   align-items: center;
   padding: 5px;
-  border-bottom: solid 1px ${colors.darkTile};
+  border-bottom: solid 1px rgba(255, 255, 255, 0.1);
   img {
     height: 16px;
     width: 16px;
-    margin-right: 10px;
+    margin: 0 10px;
   }
   span {
     font-weight: bold;

@@ -15,13 +15,12 @@ const Square = ({
   function handleClick() {
     if (highlighted) return makeMove({ position });
     if (clickable) return getPossibleMoves({ position });
-    return () => {};
+    return handleLostFocus();
   }
   return (
     <Container
       isBlack={isBlack}
       onClick={handleClick}
-      onBlur={handleLostFocus}
       clickable={clickable}
       highlighted={highlighted}
     >

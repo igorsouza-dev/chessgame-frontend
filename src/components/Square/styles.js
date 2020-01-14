@@ -1,42 +1,45 @@
 import styled from 'styled-components';
+import { colors, sizes } from '../../styles/variables';
 
 export const Container = styled.button`
-  height: 55px;
-  width: 55px;
+  height: ${sizes.chessTile}px;
+  width: ${sizes.chessTile}px;
+
   background: ${(props) => {
     if (props.highlighted) {
-      return '#EFBDB5';
+      return colors.highlighted;
     }
     if (props.isBlack) {
-      return '#623028';
+      return colors.darkTile;
     }
-    return '#cd8955';
+    return colors.lightTile;
   }};
+  border: solid 1px rgba(0, 0, 0, 0.2);
   ${(props) => {
     if (props.highlighted) {
       return `
+      border: solid 1px ${colors.highlightGlow};
       animation: glowing 2000ms ease-out alternate infinite;
       @keyframes glowing {
-        0% { box-shadow: 0 0 -10px #eee, inset 0 0 -10px #eee; }
-        100% { box-shadow: 0 0 10px #eee, inset 0 0 5px #eee; }
+        0% { box-shadow: 0 0 -10px ${colors.highlightGlow}, inset 0 0 -10px ${colors.highlightGlow}; }
+        100% { box-shadow: 0 0 10px ${colors.highlightGlow}, inset 0 0 5px ${colors.highlightGlow}; }
       }
       `;
     }
     return '';
   }}
-  border: solid 1px rgba(0, 0, 0, 0.2);
+
   transition: all 0.2s;
 
   &:hover {
-    ${(props) => props.clickable && 'background: #EFBDB5;'};
+    ${(props) => props.clickable && `background: ${colors.highlighted}`};
     cursor: ${(props) => (props.clickable ? 'pointer' : 'default')};
   }
   ${(props) =>
     props.clickable &&
     `
     &:focus {
-      border: solid 2px #000;
-      background: #EFBDB5;
+      border: dashed 4px ${props.isBlack ? colors.lightTile : colors.darkTile};
     }
     `}
   img {

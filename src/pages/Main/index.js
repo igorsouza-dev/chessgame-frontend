@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import api from '../../services/api';
 import Board from '../../components/Board';
-import Header from '../../components/Header';
 import PlayerInfo from '../../components/PlayerInfo';
 import MovesContainer from '../../components/MovesContainer';
-
 import {
   Container,
   Button,
   BoardContainer,
-  Loading,
-  PlayersContainer,
+  InfoText,
+  InfoContainer,
 } from './styles';
+import SideBar from '../../components/SideBar';
 
 export default function App() {
+  const [info, setInfo] = useState('');
   const [board, setBoard] = useState();
   const [moves, setMoves] = useState([]);
   const [browserId, setBrowserId] = useState();
@@ -23,6 +24,7 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   async function newGame() {
     setLoading(true);
+    setInfo('Loading...');
     setBoard(null);
     setMoves([]);
     try {
@@ -32,12 +34,15 @@ export default function App() {
       setTurn(data.board.turn_player === 'W' ? 'B' : 'W');
       setBrowserId(data.game.browser_id);
       localStorage.setItem('browser_id', data.game.browser_id);
-    } catch (e) {}
+    } catch (e) {
+      setInfo('Oops! Something went wrong :(');
+    }
     setLoading(false);
   }
   useEffect(() => {
     async function loadGame(browserIdStorage) {
       setLoading(true);
+      setInfo('Loading...');
       try {
         const response = await api.get('/load-game', {
           headers: {
@@ -48,7 +53,9 @@ export default function App() {
         setBoard(JSON.parse(data.board.board));
         setTurn(data.board.turn_player === 'W' ? 'B' : 'W');
         setMoves(data.moves);
-      } catch (e) {}
+      } catch (e) {
+        setInfo('Oops! Something went wrong :(');
+      }
       setLoading(false);
     }
     const browserIdStorage = localStorage.getItem('browser_id');
@@ -66,7 +73,9 @@ export default function App() {
         headers: { browser_id: browserId },
       });
       setPossibleMoves(response.data);
-    } catch (e) {}
+    } catch (e) {
+      toast.error('Oops! Something went wrong');
+    }
   }
   function clearHighlights() {
     // setPossibleMoves([]);
@@ -87,24 +96,29 @@ export default function App() {
   }
   return (
     <Container>
-      <Header>
+      <SideBar>
         <Button onClick={newGame}>New Game</Button>
-      </Header>
-      {loading && <Loading>Loading...</Loading>}
+      </SideBar>
+
+      {loading && <InfoText>{info}</InfoText>}
+      {!board && !loading && (
+        <InfoText>Sorry, something went wrong...</InfoText>
+      )}
       {board && (
         <BoardContainer>
-          <PlayersContainer>
+          <InfoContainer>
             <PlayerInfo
               player="B"
               pieces={[{ symbol: 'N', amount: 1, name: 'Knight' }]}
               turn={turn}
             />
+            <MovesContainer moves={moves} />
             <PlayerInfo
               player="W"
               pieces={[{ symbol: 'N', amount: 1, name: 'Knight' }]}
               turn={turn}
             />
-          </PlayersContainer>
+          </InfoContainer>
           <Board
             board={board}
             getPossibleMoves={getPossibleMoves}
@@ -113,7 +127,6 @@ export default function App() {
             clearHighlights={clearHighlights}
             turn={turn}
           />
-          <MovesContainer moves={moves} />
         </BoardContainer>
       )}
     </Container>

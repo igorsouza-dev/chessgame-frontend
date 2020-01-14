@@ -1,50 +1,56 @@
 import styled from 'styled-components';
+import { colors } from '../../styles/variables';
 
 export const Container = styled.div`
   height: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-
-  background-image: linear-gradient(25deg, #272238, #583c52, #8b586d, #c17689);
+  background: ${colors.darkTile};
 `;
 export const Button = styled.button`
-  background: #335577;
+  background: #fff;
   height: 46px;
   font-size: 14px;
   font-weight: bold;
   text-transform: uppercase;
-  border-radius: 4px;
   border: 0;
   padding: 0 12px;
-  color: #fff;
-
+  color: #16112c;
+  width: 100%;
+  transition: all 0.5s ease-out;
   &:hover {
-    background: #335570;
+    background: #16112c;
+    color: #fff;
   }
 `;
 export const BoardContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  align-self: stretch;
   justify-content: center;
-
-  margin-top: 46px;
+  background: ${colors.darkTile};
+  height: 100%;
+  width: 100%;
 `;
-export const PlayersContainer = styled.div`
+
+export const InfoContainer = styled.div`
   display: flex;
+  padding: 10px;
+  border: dashed 5px ${colors.lightTile};
   flex-direction: column;
-  flex: 2;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
   height: 100%;
 `;
-export const Loading = styled.h1`
+export const InfoText = styled.h1`
   flex: 1;
   font-size: 48px;
   height: 100%;
   width: 100%;
-  color: #fff;
+  color: ${colors.lightTile};
   display: flex;
   justify-content: center;
   align-items: center;

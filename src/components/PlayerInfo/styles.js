@@ -7,7 +7,7 @@ export const Container = styled.div`
   border-radius: 3px;
   padding: 10px;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   height: 100%;
   width: 100%;
@@ -25,8 +25,8 @@ export const ScoreContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   margin: 10px;
   padding: 10px;
 `;
@@ -35,7 +35,7 @@ export const PieceScoreContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-self: stretch;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   img {
     height: 49px;

@@ -17,6 +17,7 @@ export default function App() {
   const [info, setInfo] = useState('');
   const [board, setBoard] = useState();
   const [moves, setMoves] = useState([]);
+  const [score, setScore] = useState();
   const [browserId, setBrowserId] = useState();
   const [possibleMoves, setPossibleMoves] = useState();
   const [selected, setSelected] = useState();
@@ -26,6 +27,7 @@ export default function App() {
     setLoading(true);
     setInfo('Loading...');
     setBoard(null);
+    setScore(null);
     setMoves([]);
     try {
       const response = await api.post('/new-game');
@@ -33,6 +35,7 @@ export default function App() {
       setBoard(JSON.parse(data.board.board));
       setTurn(data.board.turn_player === 'W' ? 'B' : 'W');
       setBrowserId(data.game.browser_id);
+      setScore(JSON.parse(data.board.score));
       localStorage.setItem('browser_id', data.game.browser_id);
     } catch (e) {
       setInfo('Oops! Something went wrong :(');
@@ -53,6 +56,7 @@ export default function App() {
         setBoard(JSON.parse(data.board.board));
         setTurn(data.board.turn_player === 'W' ? 'B' : 'W');
         setMoves(data.moves);
+        setScore(JSON.parse(data.board.score));
       } catch (e) {
         setInfo('Oops! Something went wrong :(');
       }
@@ -90,6 +94,7 @@ export default function App() {
         setBoard(JSON.parse(data.board.board));
         setTurn(turn === 'W' ? 'B' : 'W');
         setMoves([data.move, ...moves]);
+        setScore(JSON.parse(data.board.score));
         setPossibleMoves([]);
       } catch (e) {}
     }
@@ -107,17 +112,9 @@ export default function App() {
       {board && (
         <BoardContainer>
           <InfoContainer>
-            <PlayerInfo
-              player="B"
-              pieces={[{ symbol: 'N', amount: 1, name: 'Knight' }]}
-              turn={turn}
-            />
+            {score && <PlayerInfo player="B" score={score.B} turn={turn} />}
             <MovesContainer moves={moves} />
-            <PlayerInfo
-              player="W"
-              pieces={[{ symbol: 'N', amount: 1, name: 'Knight' }]}
-              turn={turn}
-            />
+            {score && <PlayerInfo player="W" score={score.W} turn={turn} />}
           </InfoContainer>
           <Board
             board={board}

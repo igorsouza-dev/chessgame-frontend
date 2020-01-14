@@ -12,7 +12,7 @@ export default function SideBar({ children }) {
     <Container>
       <LogoContainer>
         <img src="/chessboard-white.svg" alt="" />
-        <span>Chess Game</span>
+        <span>Chess Mate</span>
         <small>by Igor Souza</small>
       </LogoContainer>
       <GithubContainer>

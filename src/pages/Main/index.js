@@ -14,7 +14,7 @@ import {
 import SideBar from '../../components/SideBar';
 
 export default function App() {
-  const [info, setInfo] = useState('');
+  const [info, setInfo] = useState('Loading...');
   const [board, setBoard] = useState();
   const [moves, setMoves] = useState([]);
   const [score, setScore] = useState();
@@ -22,7 +22,7 @@ export default function App() {
   const [possibleMoves, setPossibleMoves] = useState();
   const [selected, setSelected] = useState();
   const [turn, setTurn] = useState();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   async function newGame() {
     setLoading(true);
     setInfo('Loading...');

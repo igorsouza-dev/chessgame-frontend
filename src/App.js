@@ -2,13 +2,13 @@ import React from 'react';
 import { ToastContainer } from 'react-toastify';
 
 import GlobalStyle from './styles/global';
-import Main from './pages/Main';
+import Game from './pages/Game';
 
 export default function App() {
   return (
     <>
       <GlobalStyle />
-      <Main />
+      <Game />
       <ToastContainer autoClose={3000} />
     </>
   );

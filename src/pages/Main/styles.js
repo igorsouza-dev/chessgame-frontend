@@ -17,11 +17,11 @@ export const Button = styled.button`
   text-transform: uppercase;
   border: 0;
   padding: 0 12px;
-  color: #16112c;
+  color: ${colors.highlighted};
   width: 100%;
   transition: all 0.5s ease-out;
   &:hover {
-    background: #16112c;
+    background: ${colors.highlighted};
     color: #fff;
   }
 `;

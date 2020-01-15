@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Container } from './styles';
 
@@ -30,5 +31,21 @@ const Square = ({
     </Container>
   );
 };
-
+Square.propTypes = {
+  square: PropTypes.shape({
+    piece: PropTypes.string,
+    color: PropTypes.string,
+  }).isRequired,
+  position: PropTypes.string.isRequired,
+  isBlack: PropTypes.bool.isRequired,
+  clickable: PropTypes.bool,
+  handleLostFocus: PropTypes.func.isRequired,
+  getPossibleMoves: PropTypes.func.isRequired,
+  highlighted: PropTypes.bool,
+  makeMove: PropTypes.func.isRequired,
+};
+Square.defaultProps = {
+  highlighted: false,
+  clickable: false,
+};
 export default Square;

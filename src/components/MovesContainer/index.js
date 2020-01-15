@@ -1,7 +1,12 @@
 import React from 'react';
-import { Container, MoveList, Move, InfoText } from './styles';
+import PropTypes from 'prop-types';
 
-export default function Moves({ moves }) {
+// prettier-ignore
+import {
+  Container, MoveList, Move, InfoText,
+} from './styles';
+
+function Moves({ moves }) {
   return (
     <Container>
       <h1>Moves History</h1>
@@ -9,10 +14,13 @@ export default function Moves({ moves }) {
         {moves.length === 0 && <InfoText>No moves yet</InfoText>}
         {moves.map((move) => (
           <Move key={move.id}>
-            <span>{move.move_number}: </span>
-            <img src={`pieces/${move.player}${move.piece}.svg`} />
+            <span>{`${move.move_number}:`}</span>
+            <img
+              src={`pieces/${move.player}${move.piece}.svg`}
+              alt={move.piece}
+            />
             <span>
-              {move.from} {'->'} {move.to} {move.flag === 'x' && '(attack)'}
+              {`${move.from} -> ${move.to} ${move.flag === 'x' && '(attack)'}`}
             </span>
           </Move>
         ))}
@@ -20,3 +28,19 @@ export default function Moves({ moves }) {
     </Container>
   );
 }
+// prettier-ignore
+Moves.propTypes = {
+  moves: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      piece: PropTypes.string,
+      player: PropTypes.string,
+      flag: PropTypes.string,
+      to: PropTypes.string,
+      from: PropTypes.string,
+      move_number: PropTypes.number,
+    }),
+  ).isRequired,
+};
+
+export default Moves;

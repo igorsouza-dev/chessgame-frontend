@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Container, Outline } from './styles';
 import Square from '../Square';
@@ -14,11 +15,11 @@ const Board = ({
   function renderBoard() {
     const squares = Object.keys(board).map((square, index) => {
       let isBlack = index % 2;
-      if (
-        (index >= 8 && index < 16) ||
-        (index >= 24 && index < 32) ||
-        (index >= 40 && index < 48) ||
-        (index >= 56 && index < 64)
+      // prettier-ignore
+      if ((index >= 8 && index < 16)
+      || (index >= 24 && index < 32)
+      || (index >= 40 && index < 48)
+      || (index >= 56 && index < 64)
       ) {
         isBlack = !isBlack;
       }
@@ -50,5 +51,18 @@ const Board = ({
     </Outline>
   );
 };
+Board.propTypes = {
+  board: PropTypes.shape().isRequired,
+  getPossibleMoves: PropTypes.func,
+  highlights: PropTypes.arrayOf(PropTypes.string),
+  makeMove: PropTypes.func,
+  clearHighlights: PropTypes.func.isRequired,
+  turn: PropTypes.string.isRequired,
+};
 
+Board.defaultProps = {
+  getPossibleMoves: () => {},
+  highlights: [],
+  makeMove: () => {},
+};
 export default Board;

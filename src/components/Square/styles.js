@@ -35,13 +35,16 @@ export const Container = styled.button`
     ${(props) => props.clickable && `background: ${colors.highlighted}`};
     cursor: ${(props) => (props.clickable ? 'pointer' : 'default')};
   }
-  ${(props) =>
-    props.clickable &&
-    `
-    &:focus {
-      border: dashed 4px ${props.isBlack ? colors.lightTile : colors.darkTile};
+  ${(props) => {
+    if (props.clickable) {
+      const color = props.isBlack ? colors.lightTile : colors.darkTile;
+      return `
+        &:focus {
+          border: dashed 4px ${color};
+        }`;
     }
-    `}
+    return '';
+  }}
   img {
     width: 48px;
     height: 48px;

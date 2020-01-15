@@ -9,7 +9,7 @@ export const Container = styled.nav`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background: ${colors.sideBar}
+  background: ${colors.sideBar};
   -webkit-box-shadow: 0px 4px 29px 0px rgba(0, 0, 0, 0.55);
   -moz-box-shadow: 0px 4px 29px 0px rgba(0, 0, 0, 0.55);
   box-shadow: 0px 4px 29px 0px rgba(0, 0, 0, 0.55);

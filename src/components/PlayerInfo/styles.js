@@ -11,11 +11,33 @@ export const Container = styled.div`
   align-items: center;
   height: 100%;
   width: 100%;
+`;
+export const TitleContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
   h1 {
     font-family: 'Lobster', cursive;
     color: ${(props) => (props.player === 'W' ? '#fff' : '#000')};
     align-items: center;
     justify-content: center;
+    align-self: stretch;
+  }
+  div {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+
+    strong {
+      background: ${colors.highlightGlow};
+      border-radius: 10px;
+      color: #dfdfdf;
+      padding: 5px;
+
+      font-size: 12px;
+    }
   }
 `;
 export const ScoreContainer = styled.div`

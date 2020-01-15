@@ -13,7 +13,7 @@ import {
 } from './styles';
 import SideBar from '../../components/SideBar';
 
-export default function App() {
+export default function Main() {
   const [info, setInfo] = useState('Loading...');
   const [board, setBoard] = useState();
   const [moves, setMoves] = useState([]);
@@ -96,7 +96,9 @@ export default function App() {
         setMoves([data.move, ...moves]);
         setScore(JSON.parse(data.board.score));
         setPossibleMoves([]);
-      } catch (e) {}
+      } catch (e) {
+        toast.error('Oops! Something went wrong');
+      }
     }
   }
   return (

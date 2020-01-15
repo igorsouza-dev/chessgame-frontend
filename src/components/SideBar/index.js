@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {
   Container,
@@ -7,7 +8,7 @@ import {
   GithubContainer,
 } from './styles';
 
-export default function SideBar({ children }) {
+function SideBar({ children }) {
   return (
     <Container>
       <LogoContainer>
@@ -25,3 +26,11 @@ export default function SideBar({ children }) {
     </Container>
   );
 }
+SideBar.propTypes = {
+  children: PropTypes.element,
+};
+SideBar.defaultProps = {
+  children: () => {},
+};
+
+export default SideBar;

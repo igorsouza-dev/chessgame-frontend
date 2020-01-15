@@ -1,13 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-import { Container, ScoreContainer, PieceScoreContainer } from './styles';
+import {
+  Container,
+  ScoreContainer,
+  PieceScoreContainer,
+  TitleContainer,
+} from './styles';
 
-export default function PlayerContainer({ player, turn, score }) {
+function PlayerInfo({ player, turn, score }) {
   const otherPlayer = player === 'B' ? 'W' : 'B';
   const pieces = Object.keys(score);
   return (
     <Container player={player}>
-      <h1>{player === 'B' ? 'Black' : 'White'} pieces</h1>
+      <TitleContainer>
+        <div>&nbsp;</div>
+        <h1>{`${player === 'B' ? 'Black' : 'White'} pieces`}</h1>
+        <div>{player === turn && <strong>Your Turn</strong>}</div>
+      </TitleContainer>
       <ScoreContainer>
         <PieceScoreContainer>
           {pieces.map((piece) => (
@@ -21,3 +31,13 @@ export default function PlayerContainer({ player, turn, score }) {
     </Container>
   );
 }
+PlayerInfo.propTypes = {
+  player: PropTypes.string.isRequired,
+  turn: PropTypes.string,
+  score: PropTypes.shape.isRequired,
+};
+PlayerInfo.defaultProps = {
+  turn: 'W',
+};
+
+export default PlayerInfo;

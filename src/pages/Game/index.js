@@ -5,6 +5,7 @@ import Tutorial from '../Tutorial';
 
 export default function Game() {
   const [readTutorial, setReadTutorial] = useState(
+    // eslint-disable-next-line
     localStorage.getItem('readTutorial')
   );
   function renderGame() {

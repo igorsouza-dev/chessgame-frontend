@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
 import {
   Wrapper,
   PageContainer,
@@ -16,7 +18,7 @@ import StepsIndicator from '../../components/StepsIndicator';
 const fistPage = 1;
 const lastPage = 4;
 
-export default function Tutorial({ readTutorial }) {
+function Tutorial({ readTutorial }) {
   const [page, setPage] = useState(1);
   function previous() {
     if (page > fistPage) {
@@ -46,9 +48,10 @@ export default function Tutorial({ readTutorial }) {
           <h1>Welcome!</h1>
           <TextContainer>
             <p>
-              Hello, fellow player. This is <strong>Chess Mate</strong>, a game
-              that lets you play chess with your mates on the same device. And
-              guess what? No registration required!
+              Hello, fellow player. This is
+              <strong> Chess Mate</strong>
+              ,&nbsp;a game that lets you play chess with your mates on the same
+              device. And guess what? No registration required!
             </p>
           </TextContainer>
         </Page>
@@ -61,7 +64,7 @@ export default function Tutorial({ readTutorial }) {
               <li>show you all moves the selected piece can make</li>
               <li>Show the moves history</li>
             </ul>
-            <p>The game doesn't know:</p>
+            <p>The game doesn&apos;t know:</p>
             <ul>
               <li>what check or checkmate is</li>
               <li>special moves like Castling, Promotion and En Passant</li>
@@ -74,7 +77,7 @@ export default function Tutorial({ readTutorial }) {
           <TextContainer>
             <p>
               <strong>Chess Mate</strong>
-              's got your back!
+              &apos;s got your back!
             </p>
             <p>
               The game saves your progress after each move, just make sure to
@@ -85,7 +88,7 @@ export default function Tutorial({ readTutorial }) {
         <Page isVisible={page === 4}>
           <h1>All righty, then..</h1>
 
-          <PlayButton onClick={play}>Let's Play!</PlayButton>
+          <PlayButton onClick={play}>Let&apos;s Play!</PlayButton>
         </Page>
       </PageContainer>
       <BottomContainer>
@@ -100,3 +103,8 @@ export default function Tutorial({ readTutorial }) {
     </Wrapper>
   );
 }
+Tutorial.propTypes = {
+  readTutorial: PropTypes.func.isRequired,
+};
+
+export default Tutorial;

@@ -50,8 +50,12 @@ export const Page = styled.div`
   height: ${(props) => (props.isVisible ? '400px' : '0')};
   color: #fff;
   border-radius: 4px;
-  border: ${(props) =>
-    props.isVisible ? `dashed 5px ${colors.darkTile};` : '0'};
+  border: ${(props) => {
+    if (props.isVisible) {
+      return `dashed 5px ${colors.darkTile}`;
+    }
+    return '0';
+  }};
   display: flex;
   overflow: hidden;
   flex-direction: column;

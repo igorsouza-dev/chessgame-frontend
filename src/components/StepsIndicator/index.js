@@ -1,12 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Container, Indicator } from './styles';
 
-export default function StepsIndicator({ total, current, setPage }) {
+function StepsIndicator({ total, current, setPage }) {
   function renderIndicators() {
     const indicators = [];
     for (let i = 1; i <= total; i++) {
-      indicators.push(
+      const element = (
         <Indicator
           key={i}
           isSelected={current === i}
@@ -14,8 +15,15 @@ export default function StepsIndicator({ total, current, setPage }) {
           onClick={() => setPage(i)}
         />
       );
+      indicators.push(element);
     }
     return indicators;
   }
   return <Container>{[...renderIndicators()]}</Container>;
 }
+StepsIndicator.propTypes = {
+  total: PropTypes.number.isRequired,
+  current: PropTypes.number.isRequired,
+  setPage: PropTypes.func.isRequired,
+};
+export default StepsIndicator;

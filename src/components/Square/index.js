@@ -40,12 +40,14 @@ Square.propTypes = {
   isBlack: PropTypes.bool.isRequired,
   clickable: PropTypes.bool,
   handleLostFocus: PropTypes.func.isRequired,
-  getPossibleMoves: PropTypes.func.isRequired,
+  getPossibleMoves: PropTypes.func,
   highlighted: PropTypes.bool,
-  makeMove: PropTypes.func.isRequired,
+  makeMove: PropTypes.func,
 };
 Square.defaultProps = {
   highlighted: false,
   clickable: false,
+  getPossibleMoves: null,
+  makeMove: null,
 };
 export default Square;

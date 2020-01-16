@@ -34,10 +34,10 @@ const Board = ({
           key={square}
           square={board[square]}
           position={square}
-          isBlack={isBlack}
+          isBlack={isBlack > 0}
           clickable={clickable || highlighted}
           highlighted={highlighted}
-          getPossibleMoves={clickable && getPossibleMoves}
+          getPossibleMoves={clickable ? getPossibleMoves : null}
           handleLostFocus={clearHighlights}
           makeMove={highlighted && makeMove}
         />
@@ -57,12 +57,13 @@ Board.propTypes = {
   highlights: PropTypes.arrayOf(PropTypes.string),
   makeMove: PropTypes.func,
   clearHighlights: PropTypes.func.isRequired,
-  turn: PropTypes.string.isRequired,
+  turn: PropTypes.string,
 };
 
 Board.defaultProps = {
   getPossibleMoves: () => {},
   highlights: [],
   makeMove: () => {},
+  turn: 'W',
 };
 export default Board;

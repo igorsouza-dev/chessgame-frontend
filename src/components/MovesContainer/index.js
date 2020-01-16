@@ -20,7 +20,9 @@ function Moves({ moves }) {
               alt={move.piece}
             />
             <span>
-              {`${move.from} -> ${move.to} ${move.flag === 'x' && '(attack)'}`}
+              {`${move.from} -> ${move.to} ${
+                move.flag === 'x' ? '(attack)' : ''
+              } `}
             </span>
           </Move>
         ))}
